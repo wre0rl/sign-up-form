@@ -1,15 +1,22 @@
 const handleInvalidEvent = (event) => {
-  event.preventDefault();
+  if (!event.target.checkValidity()) {
+    // Prevent the form from submitting
+    event.preventDefault();
 
-  const input = document.querySelector(`#${event.target.id}`);
-  const error = document.createElement('span');
-
-  if (input.classList.contains('form__input--state-danger')) input.nextElementSibling.remove();
-
-  input.classList.add('form__input--state-danger');
-  error.classList.add('class', 'error--state-danger');
-  error.textContent = event.target.validationMessage;
-  input.after(error);
+    const inputs = event.target.querySelectorAll('input');
+    inputs.forEach((input) => {
+      // Remove previous error message if any
+      if (input.classList.contains('form__input--state-danger')) {
+        input.classList.remove('form__input--state-danger');
+        input.nextElementSibling.remove();
+      }
+      // Add new error message
+      if (!input.validity.valid) {
+        input.classList.add('form__input--state-danger');
+        input.insertAdjacentHTML('afterend', `<p class="error--state-danger">${input.validationMessage}</p>`);
+      }
+    });
+  }
 };
 
-document.addEventListener('invalid', handleInvalidEvent, true);
+document.addEventListener('submit', handleInvalidEvent, true);
