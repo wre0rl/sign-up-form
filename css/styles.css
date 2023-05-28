@@ -1,13 +1,13 @@
-.section {
+.form__group {
   display: flex;
   gap: 30px;
 }
 
-.section__content {
+.form__field {
   display: flex;
   flex-direction: column;
 }
 
-#create-account {
+.form__submit-button {
   margin-top: 10px;
 }
