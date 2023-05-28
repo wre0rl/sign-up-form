@@ -94,3 +94,7 @@ a {
 .button:active {
   transform: scale(.97);
 }
+
+.error--state-danger {
+  color: #DA5034;
+}
