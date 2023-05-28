@@ -3,6 +3,5 @@ Odin Project: Sign-up-Form
 
 
 ## TODO
-1. Remove default CSS browsers styling.
-2. Style the page according to the requirements.
-3. Add custom javascript error message.
+1. Add custom javascript error message.
+2. Remove error message after user input the correct format for the second time.
