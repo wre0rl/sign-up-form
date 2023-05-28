@@ -1,0 +1,13 @@
+.section {
+  display: flex;
+  gap: 30px;
+}
+
+.section__content {
+  display: flex;
+  flex-direction: column;
+}
+
+#create-account {
+  margin-top: 10px;
+}
