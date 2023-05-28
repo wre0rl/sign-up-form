@@ -7,6 +7,11 @@
   margin: 0;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .container {
   height: 100vh;
   display: flex;
@@ -18,6 +23,12 @@
   background: url(../images/bg.png) no-repeat center / contain;
 }
 
+.sidebar__logo {
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 20px;
+}
+
 .content {
   display: flex;
   flex-direction: column;
@@ -25,7 +36,8 @@
   flex: 1.5;
 }
 
-.content h1 {
+.content__header {
+  font-size: 1.5rem;
   margin-bottom: 20px;
 }
 
@@ -42,5 +54,5 @@
 
 .button {
   margin-top: 8px;
-  padding: 10px;
+  padding: 10px 30px;
 }
