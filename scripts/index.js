@@ -11,13 +11,22 @@ const handleInvalidEvent = (event) => {
         input.nextElementSibling.remove();
       }
 
+      // Password requirement
+      if (input.id === 'password') {
+        const password = input;
+        if (password.value.length < 8) {
+          input.setCustomValidity('Password must be 8 characters long');
+        } else {
+          input.setCustomValidity('');
+        }
+      }
+
       // Password matching validation
       if (input.id === 'confirm-password') {
         const password = event.target.querySelector('#password');
         const confirmPassword = input;
         if (password.value !== confirmPassword.value) {
           input.setCustomValidity('Confirm Password doesn\'t match Password');
-          console.log(input);
         } else {
           input.setCustomValidity('');
         }
