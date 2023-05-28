@@ -54,7 +54,7 @@ a {
   color: #111;
 }
 
-input {
+.form__input {
   padding: .5rem;
   font-size: 1rem;
   color: #111;
@@ -62,14 +62,19 @@ input {
   border-radius: .25rem;
 }
 
-input:focus {
+.form__input:focus {
   outline: none;
   border-color: #000;
 }
 
-input:-webkit-autofill {
+.form__input:-webkit-autofill {
   background-color: transparent !important;
   -webkit-box-shadow: 0 0 0 50px white inset;
+}
+
+.form__input--state-danger, 
+.form__input--state-danger:focus {
+  border: 1px solid #DA5034;
 }
 
 .button {
