@@ -19,4 +19,5 @@ const handleInvalidEvent = (event) => {
   }
 };
 
+// Handle event during the capture phase
 document.addEventListener('submit', handleInvalidEvent, true);
