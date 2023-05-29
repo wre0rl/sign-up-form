@@ -14,6 +14,11 @@ const handleInvalidInputs = (form) => {
     // Remove previous error message if any
     clearErrorState(input);
 
+    // Phone number requirement
+    if (input.id === 'phone-number') {
+      checkPhoneNumberFormat(input);
+    }
+
     // Password requirement
     if (input.id === 'password') {
       checkPasswordLength(input);
@@ -38,6 +43,11 @@ const clearErrorState = (input) => {
     input.nextElementSibling.remove();
   }
 };
+
+const checkPhoneNumberFormat = (input) => {
+  phoneNumberFormatError = 'Please enter a valid number';
+  input.setCustomValidity(!input.value.match('^[0-9]+$') ? phoneNumberFormatError : '');
+}
 
 const checkPasswordLength = (input) => {
   const passwordLengthError = 'Password must be 8 characters long';
