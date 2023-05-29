@@ -1,38 +1,26 @@
 const handleInvalidEvent = (event) => {
-  if (!event.target.checkValidity()) {
+  const form = event.target;
+
+  if (!form.checkValidity()) {
     // Prevent the form from submitting
     event.preventDefault();
 
-    const inputs = event.target.querySelectorAll('input');
+    const inputs = form.querySelectorAll('input');
     inputs.forEach((input) => {
       // Remove previous error message if any
-      if (input.classList.contains('form__input--state-danger')) {
-        input.classList.remove('form__input--state-danger');
-        input.nextElementSibling.remove();
-      }
+      clearErrorState(input);
 
       // Password requirement
       if (input.id === 'password') {
-        const password = input;
-        if (password.value.length < 8) {
-          input.setCustomValidity('Password must be 8 characters long');
-        } else {
-          input.setCustomValidity('');
-        }
+        checkPasswordLength(input);
       }
 
       // Password matching validation
       if (input.id === 'confirm-password') {
-        const password = event.target.querySelector('#password');
-        const confirmPassword = input;
-        if (password.value !== confirmPassword.value) {
-          input.setCustomValidity('Confirm Password doesn\'t match Password');
-        } else {
-          input.setCustomValidity('');
-        }
+        checkPasswordsMatch(input, form.querySelector('#password'));
       }
 
-      // Add new error message
+      // Handle invalid input
       if (!input.validity.valid) {
         input.classList.add('form__input--state-danger');
         input.insertAdjacentHTML('afterend', `<span class="error--state-danger">${input.validationMessage}</span>`);
@@ -40,6 +28,23 @@ const handleInvalidEvent = (event) => {
     });
   }
 };
+
+const clearErrorState = (input) => {
+  if (input.classList.contains('form__input--state-danger')) {
+    input.classList.remove('form__input--state-danger');
+    input.nextElementSibling.remove();
+  }
+};
+
+const checkPasswordLength = (input) => {
+  const passwordLengthError = 'Password must be 8 characters long';
+  input.setCustomValidity(input.value.length < 8 ? passwordLengthError : '');
+};
+
+const checkPasswordsMatch = (input, passwordInput) => {
+  const confirmPasswordError = 'Confirm Password doesn\'t match Password';
+  input.setCustomValidity(passwordInput.value !== input.value ? confirmPasswordError : '');
+}
 
 // Handle event during the capture phase
 document.addEventListener('submit', handleInvalidEvent, true);
