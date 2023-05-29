@@ -1,32 +1,35 @@
-const handleInvalidEvent = (event) => {
+const handleFormSubmit = (event) => {
   const form = event.target;
 
   if (!form.checkValidity()) {
-    // Prevent the form from submitting
     event.preventDefault();
-
-    const inputs = form.querySelectorAll('input');
-    inputs.forEach((input) => {
-      // Remove previous error message if any
-      clearErrorState(input);
-
-      // Password requirement
-      if (input.id === 'password') {
-        checkPasswordLength(input);
-      }
-
-      // Password matching validation
-      if (input.id === 'confirm-password') {
-        checkPasswordsMatch(input, form.querySelector('#password'));
-      }
-
-      // Handle invalid input
-      if (!input.validity.valid) {
-        input.classList.add('form__input--state-danger');
-        input.insertAdjacentHTML('afterend', `<span class="error--state-danger">${input.validationMessage}</span>`);
-      }
-    });
+    handleInvalidInputs(form);
   }
+};
+
+const handleInvalidInputs = (form) => {
+  const inputs = form.querySelectorAll('input');
+
+  inputs.forEach((input) => {
+    // Remove previous error message if any
+    clearErrorState(input);
+
+    // Password requirement
+    if (input.id === 'password') {
+      checkPasswordLength(input);
+    }
+
+    // Password matching validation
+    if (input.id === 'confirm-password') {
+      checkPasswordsMatch(input, form.querySelector('#password'));
+    }
+
+    // Handle invalid input
+    if (!input.validity.valid) {
+      input.classList.add('form__input--state-danger');
+      input.insertAdjacentHTML('afterend', `<span class="error--state-danger">${input.validationMessage}</span>`);
+    }
+  });
 };
 
 const clearErrorState = (input) => {
@@ -47,4 +50,4 @@ const checkPasswordsMatch = (input, passwordInput) => {
 }
 
 // Handle event during the capture phase
-document.addEventListener('submit', handleInvalidEvent, true);
+document.addEventListener('submit', handleFormSubmit, true);
