@@ -45,17 +45,17 @@ const clearErrorState = (input) => {
 };
 
 const checkPhoneNumberFormat = (input) => {
-  phoneNumberFormatError = 'Please enter a valid number';
+  phoneNumberFormatError = 'Phone number isn\'t valid';
   input.setCustomValidity(!input.value.match('^[0-9]+$') ? phoneNumberFormatError : '');
 }
 
 const checkPasswordLength = (input) => {
-  const passwordLengthError = 'Password must be 8 characters long';
+  const passwordLengthError = 'Password must be 8 chars long';
   input.setCustomValidity(input.value.length < 8 ? passwordLengthError : '');
 };
 
 const checkPasswordsMatch = (input, passwordInput) => {
-  const confirmPasswordError = 'Confirm Password doesn\'t match Password';
+  const confirmPasswordError = 'Passwords doesn\'t match';
   input.setCustomValidity(passwordInput.value !== input.value ? confirmPasswordError : '');
 }
 
